@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#244b40">
+  <meta name="description" content="繁體中文數論計算工具：模數、模逆元、歐拉函數與模冪，附完整步驟及 Q2 範例。">
+  <title>數論研究室 · 綜合計算機</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23244b40'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-size='48' fill='%23fff' font-family='serif'%3Eφ%3C/text%3E%3C/svg%3E">
+  <style>*{box-sizing:border-box} :root{--paper:#f7f8f3;--ink:#233c33;--muted:#737b72;--green:#244b40;--line:#e0e4d9;--sage:#eaf0e3;--serif:Georgia,'Times New Roman',serif}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI','Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;line-height:1.6}button,input{font:inherit}button,a,input{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}button{transition:background .16s,color .16s,transform .16s}button:disabled{cursor:default;opacity:.5}button:focus-visible,a:focus-visible{outline:3px solid #a7bb74;outline-offset:4px}input:focus{outline:2px solid #728c5c;outline-offset:2px}button:hover:not(:disabled){filter:brightness(.97)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}.math{font-family:var(--serif)}.sidebar{width:248px;position:fixed;inset:0 auto 0 0;padding:38px 24px 20px;background:#eff2e9;border-right:1px solid var(--line);display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-size:19px;font-weight:700;text-decoration:none;letter-spacing:1px}.brand-symbol{display:flex;align-items:center;justify-content:center;width:42px;height:46px;border-radius:11px;background:var(--green);color:#f5f6dd;font:39px var(--serif);padding-bottom:5px}.brand small{font-size:8px;letter-spacing:1.9px;font-weight:600;display:block;margin-top:3px}.nav-label{font-size:10px;color:#798372;margin:62px 12px 17px;letter-spacing:1.6px;display:flex;justify-content:space-between}.nav-label span{letter-spacing:1px;font-size:9px}nav{display:grid;gap:9px}.nav-button{display:flex;width:100%;align-items:center;gap:13px;border:1px solid transparent;border-radius:9px;background:transparent;text-align:left;padding:13px 12px;color:#586654}.nav-button.active{background:var(--green);color:#fff;box-shadow:0 4px 9px #28432b0b}.nav-icon{width:29px;text-align:center;font-size:13px;letter-spacing:-.5px}.nav-icon.math{font-size:27px}.nav-button>span:nth-child(2){font-size:13px;font-weight:600}.nav-button small{display:block;font-size:9px;font-weight:400;opacity:.68;letter-spacing:.2px;margin-top:1px}.nav-arrow{margin-left:auto;opacity:0;font-size:16px}.nav-button.active .nav-arrow{opacity:.7}.sidebar-note{border-top:1px solid #dce2d3;margin:45px 12px 0;padding-top:26px}.note-icon{font-size:26px;color:#889a6b}.sidebar-note h2{font-size:12px;letter-spacing:.3px;font-weight:600;margin:12px 0 8px}.sidebar-note p{color:#7a8473;font-size:11px;line-height:1.9}.note-equation{display:block;font:italic 14px var(--serif);color:#88987b;margin-top:24px}.sidebar-bottom{margin-top:auto;font-size:9px;color:#72806d;display:flex;align-items:center;gap:6px;padding-top:30px;flex-wrap:wrap}.sidebar-bottom>span:last-child{margin-left:auto;font-size:8px}.status-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#91a66b}.sidebar-bottom .status-dot{background:#82956e}main{margin-left:248px}.topbar{height:75px;padding:0 52px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;color:#7a8176;font-size:11px;letter-spacing:.6px}.slash{margin:0 14px;color:#bcc2b7}#breadcrumb{color:#3f5042}.topbar-right{font-size:10px}.topbar-right span{margin-left:18px}.page-content{max-width:1270px;margin:auto;padding:42px 52px 20px}.page-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:29px}.eyebrow{font-size:9px;letter-spacing:2.5px;color:#7a876e;display:flex;align-items:center;gap:7px}.eyebrow>span{width:4px;height:4px;background:#8b9a68}.page-heading h1{font-size:32px;font-weight:600;letter-spacing:1px;margin:10px 0 7px;line-height:1.4}.page-heading h1 span{font:italic 36px var(--serif);font-weight:400;margin-left:10px;color:#788f65}.page-heading p{margin:0;color:#81877d;font-size:12px;letter-spacing:.2px}.chapter{font:42px var(--serif);color:#c9d1bf;align-self:flex-start;padding-top:18px}.chapter span{font:11px 'Segoe UI',sans-serif;margin-left:7px;color:#959d8e}.example-banner{border:1px solid #dce5cd;border-radius:9px;display:flex;align-items:center;justify-content:space-between;gap:15px;background:#edf2e4;padding:15px 20px;margin-bottom:24px}.example-copy{display:flex;align-items:center;gap:13px;font-size:11px;font-weight:600}.example-copy small{font-size:10px;font-weight:400;display:block;color:#869278;margin-top:2px}.q-badge{font:italic 16px var(--serif);border:1px solid #c9d4b9;border-radius:6px;width:33px;height:34px;display:grid;place-items:center}.example-actions{display:flex;gap:7px}.example-actions button{background:#f8faf3;border:1px solid #d9e0cf;border-radius:5px;color:#506343;padding:7px 11px;font-size:11px}.example-actions button span{color:#9aa88c;margin-left:10px}.workspace-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:22px;margin-bottom:23px;align-items:stretch}.card{border:1px solid var(--line);border-radius:12px;background:#fffefb}.input-card{padding:23px 26px 19px}.section-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.6px;gap:8px}.section-title>span:first-child{display:flex;align-items:center;gap:9px}.tiny-square{width:5px;height:5px;border:1px solid #768d63}.small-mono{font:9px Consolas,monospace;font-weight:400;letter-spacing:1.4px;color:#969b90}.mode-switch{display:flex;background:#f1f3ec;padding:4px;border-radius:6px;margin:24px 0 20px}.mode-switch button{flex:1;font-size:11px;border:0;background:transparent;border-radius:4px;padding:7px 5px;color:#89917e}.mode-switch button.selected{background:#fffefb;color:#37553c;box-shadow:0 1px 4px #243c3310}.field label{display:flex;align-items:center;justify-content:space-between;color:#455742;font-size:11px;margin-bottom:8px}.field label span{font:italic 17px var(--serif);color:#9ca58f}.field input{background:#fbfcf8;border:1px solid #dce2d3;color:#2b4939;border-radius:6px;padding:11px 14px;font:23px var(--serif);width:100%;min-width:0;height:52px}.field input::placeholder{color:#b2baab;font-size:17px}.field-help{color:#8c9486;font-size:10px;margin:8px 0 0;line-height:1.7}.field-stack{display:grid;gap:17px;margin:23px 0 16px}.field-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.calculate-button{width:100%;border:0;border-radius:6px;background:var(--green);color:white;display:flex;justify-content:space-between;align-items:center;padding:12px 17px;font-size:12px;letter-spacing:.5px;margin-top:23px}.calculate-button>span:last-child{font-size:20px;line-height:1}.input-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:#9aa18f;font-size:9px}.input-footer button{border:0;background:transparent;color:#7e8a73;font-size:10px;padding:3px}.answer-card{background:var(--green);color:#e8ecde;border-color:var(--green);padding:23px 27px 20px;display:flex;flex-direction:column;position:relative;overflow:hidden}.answer-card::after{content:'φ';position:absolute;right:-8px;bottom:35px;font:230px var(--serif);color:#ffffff04;pointer-events:none;line-height:1}.answer-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:1px;position:relative;z-index:1}.answer-top .status-dot{margin-right:6px;background:#bed09b}.answer-top button{border:1px solid #ffffff29;background:#ffffff05;border-radius:5px;color:#cfdbc6;padding:4px 8px;font-size:9px;letter-spacing:.5px}.answer-top button span{margin-left:5px}#answer-content{flex:1;padding:23px 0 16px;position:relative;z-index:1}.answer-expression{font:italic 23px var(--serif);color:#bbcaad;overflow-wrap:anywhere}.answer-number{font:56px var(--serif);letter-spacing:1px;line-height:1.2;margin:7px 0 12px;color:#f1f4df;overflow-wrap:anywhere}.answer-number.long{font-size:27px;letter-spacing:0}.answer-number.message{font:26px 'Microsoft JhengHei',sans-serif;margin:20px 0}.answer-caption{font-size:11px;color:#b4c5ab;line-height:1.9;overflow-wrap:anywhere}.answer-bottom{border-top:1px solid #ffffff23;padding-top:13px;font-size:10px;color:#bed0b0;display:flex;align-items:center;gap:7px;overflow-wrap:anywhere;z-index:1}.answer-bottom::before{content:'✓';display:grid;place-items:center;border:1px solid #a0b58b;border-radius:50%;width:12px;height:12px;font-size:7px;flex-shrink:0}.answer-card.empty .answer-bottom::before{content:'·'}.steps-card{padding:23px 26px;margin-bottom:24px}.step{display:flex;gap:19px;margin-top:23px}.step-number{font:11px Consolas,monospace;flex-shrink:0;color:#8e9c7d;border:1px solid #e0e5d8;background:#f6f8f0;border-radius:50%;width:26px;height:26px;display:grid;place-items:center}.step-body{flex:1;min-width:0}.step h3{margin:1px 0 7px;font-size:11px;font-weight:600;letter-spacing:.3px}.step-formula{font:20px var(--serif);line-height:1.8;letter-spacing:.2px;overflow-wrap:anywhere}.step-formula sup{font-size:.6em}.step-note{font-size:11px;line-height:1.8;color:#89907f;margin:4px 0 0;overflow-wrap:anywhere}.step:last-child .step-formula{color:#527440}.step-divider{border-bottom:1px dashed #e7eadd;margin:16px 0 0}.empty-steps{padding:27px 0 10px;font-size:12px;color:#8a9380}.concept-strip{display:flex;align-items:center;gap:13px;padding:0 6px 25px;border-bottom:1px solid var(--line)}.concept-icon{font:italic 14px var(--serif);color:#9aa88b;width:19px;height:19px;border:1px solid #bac5ae;border-radius:50%;display:grid;place-items:center;flex-shrink:0}.concept-strip h2{font-size:11px;margin:0 0 3px;color:#6f7e63;font-weight:600}.concept-strip p{font-size:10px;color:#929a88;margin:0;max-width:540px}.concept-formula{margin-left:auto;color:#7d8b6d;white-space:nowrap;font-size:17px;padding-left:15px}.history-section{margin:23px 0 31px}.history-heading{display:flex;justify-content:space-between;align-items:center}.history-heading h2{font-size:11px;font-weight:500;margin:0;color:#6d7c61}.history-heading h2 span{font-weight:400;font-size:9px;color:#a3ac99;margin-left:10px}.history-heading button{border:0;background:transparent;color:#8b9680;font-size:10px;padding:4px}.history-list{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}#history-list{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}.history-item{border:1px solid #dfe5d6;background:#f3f5ec;border-radius:5px;padding:8px 12px;color:#667957;font:12px var(--serif);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.history-empty{font-size:10px;color:#9ba38f}footer{border-top:1px solid var(--line);padding-top:17px;display:flex;justify-content:space-between;font-size:9px;color:#9aa48e;letter-spacing:.3px}.footer-dot{padding:0 6px;color:#bac1b1}#error-message{background:#fff1e9;color:#9e442b;border:1px solid #edcbbd;padding:10px 12px;font-size:11px;border-radius:6px;margin-top:14px}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#244b40;color:#fff;border:1px solid #6c856b;box-shadow:0 4px 18px #20332620;border-radius:8px;padding:10px 20px;font-size:12px;z-index:10}.factor-header,.factor-row{display:grid;grid-template-columns:1fr 74px 27px;gap:9px;align-items:center}.factor-header{color:#8b947f;font-size:10px;margin-bottom:6px}.factor-row{margin-bottom:8px}.factor-row input{font-size:19px;height:41px;padding:7px 10px}.remove-factor{background:none;border:0;color:#9ba68d;padding:4px;font-size:20px}.add-factor{border:1px dashed #ced8c2;border-radius:5px;background:none;color:#7c906b;font-size:10px;width:100%;padding:7px;margin-top:2px}.factor-formula{font:italic 16px var(--serif);color:#7e9071;text-align:center;margin:14px 0 0}.verification{font-size:11px;color:#aabd9b;margin-top:10px;overflow-wrap:anywhere}.euclid-details{margin-top:14px;font-size:11px;color:#6e805e}.euclid-details summary{cursor:pointer}.euclid-lines{padding:12px 15px;background:#f4f6ee;border:1px solid #e5e9dc;border-radius:6px;margin-top:8px;font:15px/1.9 var(--serif);overflow-wrap:anywhere}.busy{opacity:.6}.input-card form{margin:0}.factor-help{font-size:9px;line-height:1.7;color:#919c85;margin-top:10px}
+@media(min-width:1500px){.page-content{padding-top:52px}.page-heading{margin-bottom:34px}.workspace-grid{gap:26px}.answer-number{font-size:64px}.input-card,.answer-card{padding:28px 32px}.steps-card{padding:27px 32px}.step{margin-top:27px}}
+@media(max-width:1150px){.sidebar{width:215px;padding:30px 17px 17px}main{margin-left:215px}.brand{font-size:17px}.brand small{font-size:7px;letter-spacing:1.5px}.page-content{padding:32px 30px 20px}.topbar{padding:0 30px}.example-banner{padding:13px 16px}.example-copy small{display:none}.example-actions button{padding:7px 9px}.example-actions button span{margin-left:4px}.input-card,.answer-card{padding:20px}.concept-formula{font-size:15px}.page-heading h1{font-size:29px}.chapter{font-size:36px}}
+@media(max-width:900px){.sidebar{width:185px;padding:25px 12px 18px}.brand{font-size:15px;gap:8px}.brand-symbol{width:35px;height:40px}.brand small{font-size:6px}.nav-label{margin-top:45px}.nav-button{padding:12px 8px;gap:8px}.nav-button>span:nth-child(2){font-size:12px}.nav-button small{font-size:8px}.sidebar-note{margin-top:30px}.sidebar-note h2{font-size:10px}.sidebar-note p{font-size:10px}.sidebar-bottom{font-size:8px}main{margin-left:185px}.page-content{padding:30px 22px 16px}.topbar{padding:0 22px;height:64px}.topbar-right{display:none}.workspace-grid{gap:15px;grid-template-columns:1fr 1fr}.example-banner{flex-wrap:wrap;gap:10px}.example-copy small{display:block}.example-actions{width:100%}.example-actions button{flex:1}.input-card,.answer-card{padding:18px}.small-mono{font-size:8px;letter-spacing:.8px}.answer-number{font-size:47px}.concept-formula{display:none}.page-heading p{font-size:11px}.chapter{display:none}.steps-card{padding:20px}}
+@media(max-width:680px){.sidebar{position:static;width:100%;padding:19px 20px 11px;border-right:0;border-bottom:1px solid var(--line)}.brand{font-size:17px;gap:10px}.brand-symbol{width:33px;height:36px;font-size:30px}.brand small{font-size:7px;letter-spacing:1.6px}.nav-label,.sidebar-note,.sidebar-bottom{display:none}nav{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:19px}.nav-button{padding:9px 4px;gap:5px;justify-content:center;border-radius:6px}.nav-button small,.nav-arrow{display:none}.nav-button>span:nth-child(2){font-size:10px}.nav-icon{width:auto;font-size:9px}.nav-icon.math{font-size:19px}.nav-button.active{box-shadow:none}main{margin-left:0}.topbar{display:none}.page-content{padding:28px 20px 17px}.page-heading{margin-bottom:23px}.page-heading h1{font-size:28px;margin-top:8px}.page-heading h1 span{font-size:32px}.page-heading p{font-size:11px;line-height:1.9;max-width:310px}.eyebrow{font-size:8px;letter-spacing:2px}.example-banner{padding:13px 14px;gap:13px;margin-bottom:18px}.example-actions button{font-size:10px;padding:7px 6px}.example-copy{font-size:11px}.example-copy small{font-size:9px}.workspace-grid{grid-template-columns:1fr;gap:17px;margin-bottom:18px}.input-card{padding:20px}.answer-card{padding:21px}.answer-number{font-size:53px}.answer-card::after{font-size:200px;bottom:10px}#answer-content{padding:19px 0 15px}.mode-switch{margin-top:20px}.steps-card{padding:20px;margin-bottom:21px}.step{gap:12px;margin-top:22px}.step-formula{font-size:18px}.step h3{font-size:11px}.step-note{font-size:10px}.concept-strip{padding:0 1px 21px;align-items:flex-start}.concept-icon{margin-top:3px}.concept-strip p{font-size:10px;line-height:1.8}.concept-strip h2{margin-bottom:5px}footer{font-size:8px;gap:15px;flex-wrap:wrap}.history-section{margin-bottom:23px}.history-item{font-size:11px}.input-footer{font-size:9px}.calculate-button{padding:13px 16px}}
+/* Keep instructional text comfortable to read on both desktop and mobile. */
+.field label,.step h3,.answer-caption{font-size:13px}.field-help,.step-note,.concept-strip p{font-size:12px;color:#6d7963}.section-title,.calculate-button{font-size:14px}.page-heading p{font-size:14px;color:#707b67}.concept-strip h2{font-size:13px}.example-copy{font-size:13px}.example-copy small{font-size:11px;color:#6c7e5b}.example-actions button{font-size:12px}.mode-switch button{font-size:12px}.input-footer{font-size:10px;color:#76836b}.input-card,.answer-card{min-width:0}.answer-caption{color:#c1cfb7}.factor-help{font-size:11px;color:#748268}.empty-steps{font-size:13px}.nav-button>span:nth-child(2){font-size:14px}.step-note sup{font-size:.75em}.answer-top{font-size:12px}.answer-bottom{font-size:11px}.sidebar-note p{color:#6d7b61}.small-mono{color:#737d68}.concept-formula{white-space:normal;min-width:180px}
+@media(max-width:680px){.nav-button>span:nth-child(2){font-size:11px}.page-heading p{font-size:13px}.step-formula{font-size:19px}.example-actions button{font-size:11px}.concept-strip p{font-size:12px}.concept-strip h2{font-size:13px}.step h3{font-size:13px}.step-note{font-size:12px}.input-footer{font-size:10px}.field-help{font-size:11px}.page-heading h1 span{margin-left:5px}.page-heading h1{font-size:27px}}
+@media(max-width:420px){.nav-button{flex-direction:column;gap:2px;padding:8px 3px}.nav-button>span:nth-child(2){white-space:nowrap}.nav-icon,.nav-icon.math{font-size:18px;line-height:22px}.nav-icon:not(.math){font-size:12px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="數論研究室首頁"><span class="brand-symbol">φ</span><span>數論研究室<small>NUMBER THEORY LAB</small></span></a>
+    <div class="nav-label">計算工具 <span>01 — 04</span></div>
+    <nav aria-label="計算工具">
+      <button class="nav-button" data-tool="mod"><span class="nav-icon">mod</span><span>模數運算<small>Modulo</small></span><span class="nav-arrow">↗</span></button>
+      <button class="nav-button" data-tool="inverse"><span class="nav-icon math">a⁻¹</span><span>模逆元<small>Modular inverse</small></span><span class="nav-arrow">↗</span></button>
+      <button class="nav-button active" data-tool="phi" aria-current="page"><span class="nav-icon math">φ</span><span>歐拉函數<small>Euler’s totient</small></span><span class="nav-arrow">↗</span></button>
+      <button class="nav-button" data-tool="power"><span class="nav-icon math">aᵉ</span><span>模冪運算<small>Modular exponentiation</small></span><span class="nav-arrow">↗</span></button>
+    </nav>
+    <section class="sidebar-note"><span class="note-icon">✳</span><h2>不只答案，也理解過程。</h2><p>從質因數分解到模運算，<br>讓每一步都有跡可循。</p><span class="note-equation">a · a⁻¹ ≡ 1 (mod m)</span></section>
+    <div class="sidebar-bottom"><span class="status-dot"></span> 所有計算在你的瀏覽器完成<span>v1.0</span></div>
+  </aside>
+
+  <main>
+    <header class="topbar"><span>數學工具箱 <span class="slash">/</span> <span id="breadcrumb">歐拉函數</span></span><span class="topbar-right">為每一個「為什麼」而算 <span>↗</span></span></header>
+    <div class="page-content">
+      <section class="page-heading"><div><div class="eyebrow"><span></span> THE BEAUTY OF NUMBERS</div><h1 id="page-title">歐拉函數 <span>φ(n)</span></h1><p id="page-description">找出與 n 互質的正整數個數，從分解到答案，一步一步看懂。</p></div><span class="chapter" id="chapter">03<span>/ 04</span></span></section>
+      <section class="example-banner" id="example-banner"><div class="example-copy"><span class="q-badge">Q2</span><span>課堂題目，直接開始。<small>載入圖片中的歐拉函數範例</small></span></div><div class="example-actions"><button data-example="factors">質因數形式 <span>↗</span></button></div></section>
+
+      <div class="workspace-grid">
+        <section class="card input-card"><div class="section-title"><span><span class="tiny-square"></span>輸入數值</span><span class="small-mono" id="input-tag">INPUT / φ</span></div>
+          <form id="calculator" novalidate>
+            <div id="input-fields"></div>
+            <div id="error-message" role="alert" tabindex="-1" hidden></div>
+            <button class="calculate-button" type="submit"><span id="calculate-label">計算 φ(n)</span><span>→</span></button>
+            <div class="input-footer"><span>↵ 按 Enter 快速計算</span><button type="button" id="reset">重設</button></div>
+          </form>
+        </section>
+        <section class="card answer-card" aria-live="polite" aria-atomic="true"><div class="answer-top"><span><span class="status-dot"></span> 計算結果</span><button id="copy-answer" type="button" aria-label="複製計算結果">複製 <span>▢</span></button></div><div id="answer-content"></div><div class="answer-bottom" id="answer-bottom"></div></section>
+      </div>
+
+      <section class="card steps-card"><div class="section-title"><span><span class="tiny-square"></span>計算步驟</span><span class="small-mono">STEP BY STEP</span></div><div id="steps-content"></div></section>
+      <section class="concept-strip"><div class="concept-icon">i</div><div><h2 id="concept-title"></h2><p id="concept-text"></p></div><div class="concept-formula math" id="concept-formula"></div></section>
+      <section class="history-section"><div class="history-heading"><h2>最近計算 <span>本次使用紀錄</span></h2><button id="clear-history" type="button">清除</button></div><div id="history-list"></div></section>
+      <footer><span>數論研究室 <span class="footer-dot">·</span> 把抽象，算明白。</span><span>整數精確運算 <span class="footer-dot">/</span> 學習與練習</span></footer>
+    </div>
+  </main>
+  <div id="toast" role="status" hidden></div>
+  <script>(function (root) {
+  'use strict';
+  const LIMIT = 1000000000000n;
+  function integer(value, label = '數值') {
+    const s = String(value).trim();
+    if (!/^[+-]?\d+$/.test(s)) throw new Error(`${label}請輸入整數，不接受小數或算式。`);
+    if (s.replace(/^[+-]/, '').length > 300) throw new Error(`${label}最多接受 300 位數。`);
+    return BigInt(s);
+  }
+  function positive(value, label, min = 1n) {
+    const n = integer(value, label);
+    if (n < min) throw new Error(`${label}必須大於或等於 ${min}。`);
+    return n;
+  }
+  const mod = (a, m) => ((a % m) + m) % m;
+  function gcd(a,b) { a = a < 0n ? -a : a; b = b < 0n ? -b : b; while(b) [a,b]=[b,a%b]; return a; }
+  function modulus(aValue, mValue) {
+    const a = integer(aValue, '被除數 a'), m = positive(mValue, '模數 m');
+    const r = mod(a,m), q = (a-r)/m;
+    return { a,m,r,q };
+  }
+  function inverse(aValue,mValue) {
+    const a = integer(aValue,'整數 a'), m = positive(mValue,'模數 m',2n), normalized = mod(a,m);
+    let oldR=m, r=normalized, oldS=0n, s=1n, rows=[];
+    while(r) {
+      const q=oldR/r, next=oldR-q*r;
+      rows.push({a:oldR,b:r,q,r:next});
+      [oldR,r]=[r,next]; [oldS,s]=[s,oldS-q*s];
+    }
+    if(oldR!==1n) return {a,m,gcd:oldR,exists:false,rows};
+    const x=mod(oldS,m), y=(1n-a*x)/m;
+    return {a,m,gcd:oldR,exists:true,x,y,rows};
+  }
+  function factor(n) {
+    if(n<1n || n>LIMIT) throw new Error('自動分解的 n 範圍為 1 到 1,000,000,000,000；更大的數可使用「已知質因數」。');
+    let remaining=n, factors=[];
+    for(let p=2n; p*p<=remaining; p = p===2n ? 3n : p+2n) {
+      let e=0n;
+      while(remaining%p===0n) {remaining/=p;e++;}
+      if(e) factors.push({p,e});
+    }
+    if(remaining>1n) factors.push({p:remaining,e:1n});
+    return factors;
+  }
+  function fromFactors(factors) {
+    let n=1n, value=1n;
+    const terms=factors.map(({p,e})=> {
+      const power=p**e, term=(p**(e-1n))*(p-1n);
+      n*=power;value*=term;
+      return {p,e,term};
+    });
+    return {n,value,factors,terms};
+  }
+  function totient(value) {const n=positive(value,'正整數 n');return fromFactors(factor(n));}
+  function factoredTotient(rows) {
+    if(!rows.length || rows.length>8) throw new Error('請提供 1 到 8 組質因數。');
+    const seen=new Set(); let estimatedDigits=0;
+    const factors=rows.map(row=> {
+      const p=positive(row.p,'質數 p',2n), e=positive(row.e,'指數 e');
+      if(p>LIMIT) throw new Error('每個質數 p 不可超過 1,000,000,000,000。');
+      if(e>100n) throw new Error('每個指數 e 必須介於 1 到 100。');
+      if(seen.has(p.toString())) throw new Error(`質數 ${p} 重複了，請先合併指數。`);
+      seen.add(p.toString());
+      const decomposition=factor(p);
+      if(decomposition.length!==1 || decomposition[0].e!==1n) throw new Error(`${p} 不是質數，請輸入質因數。`);
+      estimatedDigits += Math.log10(Number(p))*Number(e);
+      return {p,e};
+    }).sort((a,b)=>a.p<b.p?-1:1);
+    if(estimatedDigits>=300) throw new Error('展開後的 n 最多接受 300 位數，請縮小質數或指數。');
+    return fromFactors(factors);
+  }
+  function power(aValue,eValue,mValue) {
+    const a=integer(aValue,'底數 a'), e=positive(eValue,'指數 e',0n), m=positive(mValue,'模數 m');
+    let exp=e, base=mod(a,m), result=1n%m, rows=[];
+    while(exp>0n) {
+      const bit=exp%2n;
+      if(bit) result=(result*base)%m;
+      if(rows.length<16) rows.push({exp,base,bit,result});
+      base=(base*base)%m; exp/=2n;
+    }
+    return {a,e,m,value:result,rows,steps:e===0n?0:e.toString(2).length};
+  }
+  const api={integer,mod,gcd,modulus,inverse,totient,factoredTotient,power};
+  if(typeof module!=='undefined' && module.exports) module.exports=api;
+  else root.NumberLab=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+</script>
+  <script>'use strict';
+const $ = (id) => document.getElementById(id);
+const math = NumberLab;
+const meta = {
+  phi:{name:'歐拉函數',symbol:'φ(n)',chapter:'03',description:'找出與 n 互質的正整數個數，從分解到答案，一步一步看懂。',button:'計算 φ(n)',concept:'為什麼要用歐拉函數？',text:'φ(n) 計算 1 到 n 之間與 n 互質的整數個數，也是理解歐拉定理與 RSA 的基礎。依慣例，φ(1) = 1。',formula:'φ(n) = n ∏ (1 − 1/p)'},
+  mod:{name:'模數運算',symbol:'a mod m',chapter:'01',description:'求出整數相除後的非負餘數，讓同餘關係一目了然。',button:'計算餘數',concept:'模數運算，像時鐘一樣循環。',text:'取 m > 0，結果 r 一律落在 0 ≤ r < m。即使 a 是負數，也回傳非負餘數。',formula:'a = q · m + r'},
+  inverse:{name:'模逆元',symbol:'a⁻¹ mod m',chapter:'02',description:'找出讓 a × x ≡ 1 (mod m) 成立的 x，並檢查逆元是否存在。',button:'計算模逆元',concept:'模逆元存在的條件',text:'只有 gcd(a, m) = 1 時，a 才存在模 m 的乘法逆元。使用擴展歐幾里得算法求解，結果取 0 到 m − 1。',formula:'a · a⁻¹ ≡ 1 (mod m)'},
+  power:{name:'模冪運算',symbol:'aᵉ mod m',chapter:'04',description:'用平方乘法快速計算冪次的餘數，適合練習 RSA 加密與解密。',button:'計算模冪',concept:'先取餘數，讓大次方也能輕鬆計算。',text:'以指數的二進位展開，反覆平方並取模。指數 e 必須為非負整數；e = 0 時採用 a⁰ = 1 的慣例（含 a = 0）。',formula:'C ≡ Mᵉ (mod n)'}
+};
+let current='phi', phiMode='number', history=[], copyText='', toastTimer;
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const readable=n=>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const powHTML=(p,e)=>e===1n?`${p}`:`${p}<sup>${e}</sup>`;
+const factorHTML=factors=>factors.length?factors.map(({p,e})=>powHTML(p,e)).join(' × '):'1';
+function field(id,label,variable,value,hint='',signed=false){return `<div class="field"><label for="${id}">${label}<span>${variable}</span></label><input id="${id}" name="${id}" type="text" inputmode="${signed?'text':'numeric'}" autocomplete="off" spellcheck="false" maxlength="302" value="${escapeHTML(value)}" ${hint?`aria-describedby="${id}-hint"`:''}>${hint?`<p class="field-help" id="${id}-hint">${hint}</p>`:''}</div>`;}
+function factorRow(p='',e='1'){return `<div class="factor-row"><div class="field"><input type="text" class="prime-input" aria-label="質數 p" inputmode="numeric" value="${escapeHTML(p)}" placeholder="質數" maxlength="13"></div><div class="field"><input type="text" class="exponent-input" aria-label="指數 e" inputmode="numeric" value="${escapeHTML(e)}" maxlength="3"></div><button class="remove-factor" type="button" aria-label="移除此質因數">×</button></div>`;}
+function renderFields(payload){
+  if(current==='phi'){
+    $('input-fields').innerHTML=`<div class="mode-switch" aria-label="歐拉函數輸入方式"><button type="button" data-mode="number" class="${phiMode==='number'?'selected':''}" aria-pressed="${phiMode==='number'}">輸入整數 n</button><button type="button" data-mode="factors" class="${phiMode==='factors'?'selected':''}" aria-pressed="${phiMode==='factors'}">已知質因數</button></div>` + (phiMode==='number'?field('n','正整數 n','n',payload?.n??'4356','自動質因數分解 · 範圍 1 ≤ n ≤ 10¹²'):`<div class="factor-header"><span>質數 p</span><span>指數 e</span><span></span></div><div id="factor-rows">${(payload?.rows??[{p:'2',e:'2'},{p:'3',e:'2'},{p:'11',e:'2'}]).map(r=>factorRow(r.p,r.e)).join('')}</div><button type="button" class="add-factor" id="add-factor">＋ 新增質因數</button><p class="factor-formula">n = p₁<sup>e₁</sup> · p₂<sup>e₂</sup> · … · pₜ<sup>eₜ</sup></p><p class="factor-help">p 須為互異質數（≤ 10¹²），e 為 1–100 的整數。最多 8 組，展開後 n 最多 300 位。</p>`);
+  }else if(current==='mod'||current==='inverse'){
+    $('input-fields').innerHTML=`<div class="field-stack">${field('a',current==='mod'?'被除數 a':'整數 a','a',payload?.a??(current==='mod'?'17':'17'),'',true)}${field('m','模數 m','m',payload?.m??(current==='mod'?'5':'3120'),current==='mod'?'m 必須為正整數；a 可為負整數。':'m 必須 ≥ 2；a 可為負整數。')}</div><p class="field-help">整數最多 300 位，精確計算不捨入。</p>`;
+  }else{
+    $('input-fields').innerHTML=`<div class="field-stack">${field('a','底數 a','a',payload?.a??'65','',true)}<div class="field-pair">${field('e','指數 e','e',payload?.e??'17')}${field('m','模數 m','m',payload?.m??'3233')}</div><p class="field-help">e ≥ 0、m ≥ 1；每個整數最多 300 位。</p></div>`;
+  }
+  $('error-message').hidden=true;
+  updateRemoveButtons();
+}
+function updateRemoveButtons(){
+  const rows=document.querySelectorAll('.factor-row');
+  rows.forEach((r,i)=>{r.querySelector('.prime-input').setAttribute('aria-label',`第 ${i+1} 組質數 p`);r.querySelector('.exponent-input').setAttribute('aria-label',`第 ${i+1} 組指數 e`);r.querySelector('button').disabled=rows.length===1;});
+  if($('add-factor')) $('add-factor').disabled=rows.length>=8;
+}
+function selectTool(tool,payload,run=false){
+  current=tool;
+  if(payload?.mode) phiMode=payload.mode;
+  const config=meta[tool];
+  document.querySelectorAll('[data-tool]').forEach(b=>{b.classList.toggle('active',b.dataset.tool===tool);if(b.dataset.tool===tool)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+  $('page-title').innerHTML=`${config.name} <span>${config.symbol}</span>`;
+  $('breadcrumb').textContent=config.name;
+  $('page-description').textContent=config.description;
+  $('chapter').innerHTML=`${config.chapter}<span>/ 04</span>`;
+  $('calculate-label').textContent=config.button;
+  $('input-tag').textContent=`INPUT / ${tool==='phi'?'φ':tool.toUpperCase()}`;
+  $('concept-title').textContent=config.concept;
+  $('concept-text').textContent=config.text;
+  $('concept-formula').textContent=config.formula;
+  $('example-banner').hidden=tool!=='phi';
+  renderFields(payload);clearResult();
+  if(run) calculate(true);
+}
+function clearResult(){
+  copyText='';$('copy-answer').disabled=true;
+  document.querySelector('.answer-card').classList.add('empty');
+  $('answer-content').innerHTML=`<div class="answer-expression">${meta[current].symbol}</div><div class="answer-number">—</div><div class="answer-caption">輸入數值，開始探索數字的關係。</div>`;
+  $('answer-bottom').textContent='計算後顯示驗算與說明';
+  $('steps-content').innerHTML='<div class="empty-steps">準備好後，按下計算即可查看完整過程。</div>';
+}
+function step(title,formula,note='',extra=''){return {title,formula,note,extra};}
+function showResult(expression,value,caption,bottom,steps,message=false){
+  const digits=String(value).length;
+  document.querySelector('.answer-card').classList.remove('empty');
+  $('answer-content').innerHTML=`<div class="answer-expression">${expression}</div><div class="answer-number ${message?'message':digits>13?'long':''}">${escapeHTML(value)}</div><div class="answer-caption">${caption}</div>`;
+  $('answer-bottom').textContent=bottom;
+  $('steps-content').innerHTML=steps.map((s,i)=>`<div class="step"><div class="step-number">0${i+1}</div><div class="step-body"><h3>${s.title}</h3><div class="step-formula">${s.formula}</div>${s.note?`<p class="step-note">${s.note}</p>`:''}${s.extra}${i<steps.length-1?'<div class="step-divider"></div>':''}</div></div>`).join('');
+  $('copy-answer').disabled=false;
+}
+function getPayload(){
+  if(current==='phi')return phiMode==='number'?{mode:phiMode,n:$('n').value}:{mode:phiMode,rows:[...document.querySelectorAll('.factor-row')].map(r=>({p:r.querySelector('.prime-input').value,e:r.querySelector('.exponent-input').value}))};
+  if(current==='power')return {a:$('a').value,e:$('e').value,m:$('m').value};
+  return {a:$('a').value,m:$('m').value};
+}
+function calculate(record=true){
+  $('error-message').hidden=true;
+  const payload=getPayload();
+  try{
+    if(current==='phi'){
+      const r=phiMode==='number'?math.totient(payload.n):math.factoredTotient(payload.rows);
+      const decomposition=`${r.n} = ${factorHTML(r.factors)}`;
+      const substituted=r.factors.map(({p,e})=>`${p}<sup>${e} − 1</sup> × (${p} − 1)`).map(t=>`[${t}]`).join(' × ');
+      const steps=r.n===1n?[
+        step('確認定義','n = 1','φ(1) 依慣例定義為 1。'),
+        step('檢查互質關係','gcd(1, 1) = 1','1 到 1 之間只有整數 1，它與 1 互質。'),
+        step('得到結果','φ(1) = 1')
+      ]:[
+        step('質因數分解',decomposition,'將 n 表示為互異質數的冪次乘積。'),
+        step('套用歐拉函數公式',`φ(n) = ∏ pᵢ<sup>eᵢ − 1</sup>(pᵢ − 1)`,`代入：${substituted}`),
+        step('相乘，得到答案',`φ(${r.n}) = ${r.terms.map(t=>t.term).join(' × ')}${r.terms.length>1?` = <strong>${r.value}</strong>`:''}`,`共有 ${readable(r.value)} 個正整數與 ${r.n} 互質。`)
+      ];
+      copyText=`φ(${r.n}) = ${r.value}`;
+      showResult(`φ(${r.n}) =`,readable(r.value),`在 1 到 ${readable(r.n)} 之間，<br>共有 ${readable(r.value)} 個整數與 ${readable(r.n)} 互質。`,r.n===1n?'依定義 φ(1) = 1':`已驗證 ${r.factors.length} 個不同質因數 · 精確整數結果`,steps);
+    }else if(current==='mod'){
+      const r=math.modulus(payload.a,payload.m);
+      copyText=`${r.a} mod ${r.m} = ${r.r}`;
+      showResult(`${r.a} mod ${r.m} =`,r.r.toString(),'依照非負餘數定義計算。',`範圍檢查：0 ≤ ${r.r} < ${r.m}`, [step('整數除法',`${r.a} = (${r.q}) × ${r.m} + ${r.r}`,'取商 q，使餘數 r 落在 0 到 m − 1。'),step('取得非負餘數',`r = ${r.r}`,r.a<0n?'被除數是負數時，仍回傳非負餘數。':''),step('驗算同餘關係',`${r.a} ≡ ${r.r} (mod ${r.m})`,`(${r.a} − ${r.r}) ÷ ${r.m} = ${r.q}，確實是整數。`)]);
+    }else if(current==='inverse'){
+      const r=math.inverse(payload.a,payload.m);
+      const euclid=`<details class="euclid-details"><summary>展開歐幾里得除法過程（${r.rows.length} 步）</summary><div class="euclid-lines">${r.rows.length?r.rows.map(row=>`${row.a} = ${row.q} × ${row.b} + ${row.r}`).join('<br>'):`${r.m} ÷ 0：最大公因數為 ${r.m}`}</div></details>`;
+      if(!r.exists){
+        copyText=`${r.a} 在模 ${r.m} 下不存在逆元，gcd = ${r.gcd}`;
+        showResult(`${r.a}<sup>−1</sup> mod ${r.m}`,'逆元不存在',`gcd(${r.a}, ${r.m}) = ${r.gcd} ≠ 1`, '條件檢查完成：a 與 m 不互質',[step('先檢查最大公因數',`gcd(${r.a}, ${r.m}) = ${r.gcd}`,'',euclid),step('判斷是否存在逆元',`${r.gcd} ≠ 1`,'a 與 m 不互質，因此不存在整數 x 使 a × x ≡ 1 (mod m)。')],true);
+      }else{
+        copyText=`${r.a}^(-1) mod ${r.m} = ${r.x}`;
+        showResult(`${r.a}<sup>−1</sup> mod ${r.m} =`,r.x.toString(),`也就是 ${r.a} × ${r.x} ≡ 1 (mod ${r.m})。`,'驗算通過：a × 逆元 的模數結果為 1',[step('確認 a 與 m 互質',`gcd(${r.a}, ${r.m}) = 1`,'最大公因數是 1，模逆元存在。',euclid),step('擴展歐幾里得算法',`(${r.a}) × (${r.x}) + (${r.m}) × (${r.y}) = 1`,`求出貝祖等式中的係數，並將 a 的係數正規化到 0 ≤ x < ${r.m}。`),step('驗算模逆元',`(${r.a} × ${r.x}) mod ${r.m} = 1`,`逆元 x = ${r.x}；其他解為 x + k × ${r.m}，其中 k 為整數。`)]);
+      }
+    }else{
+      const r=math.power(payload.a,payload.e,payload.m);
+      copyText=`${r.a}^${r.e} mod ${r.m} = ${r.value}`;
+      const details=r.rows.length?`<details class="euclid-details"><summary>查看平方乘法過程${r.steps>16?'（前 16 步）':''}</summary><div class="euclid-lines">${r.rows.map((row,i)=>`${i+1}. e = ${row.exp}；底數餘數 = ${row.base}<br>最低位 = ${row.bit}，累積結果 = ${row.result}`).join('<br>')}</div></details>`:'';
+      showResult(`${r.a}<sup>${r.e}</sup> mod ${r.m} =`,r.value.toString(),'反覆平方，每次乘法後取模。',`完成 ${r.steps} 輪平方乘法 · 精確整數結果`,[step('先將底數取模',`${r.a} mod ${r.m} = ${math.mod(r.a,r.m)}`),step('將指數展開為二進位',`${r.e} = (${r.e.toString(2)})₂`,r.e===0n?'指數為 0，採用 a⁰ = 1 的慣例。':'由右到左讀取：遇到 1 就累乘，每一輪將底數平方並取模。',details),step('得到模冪結果',`${r.a}<sup>${r.e}</sup> ≡ ${r.value} (mod ${r.m})`,`結果滿足 0 ≤ ${r.value} < ${r.m}。`)]);
+    }
+    if(record){history.unshift({tool:current,payload,label:copyText});history=history.slice(0,6);renderHistory();}
+  }catch(error){
+    clearResult();$('error-message').textContent=error.message;$('error-message').hidden=false;$('error-message').focus();
+  }
+}
+function renderHistory(){
+  $('history-list').innerHTML=history.length?history.map((h,i)=>`<button type="button" class="history-item" data-history="${i}" title="${escapeHTML(h.label)}">${escapeHTML(h.label)}</button>`).join(''):'<span class="history-empty">計算結果會保留在這裡，點選即可重新載入。</span>';
+  $('clear-history').disabled=!history.length;
+}
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,2400);}
+document.querySelector('nav').addEventListener('click',e=>{const b=e.target.closest('[data-tool]');if(b)selectTool(b.dataset.tool);});
+document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();selectTool('phi',{mode:'number',n:'4356'},true);});
+$('calculator').addEventListener('submit',e=>{e.preventDefault();calculate();});
+$('calculator').addEventListener('input',()=>{clearResult();$('error-message').hidden=true;});
+$('input-fields').addEventListener('click',e=>{
+  const mode=e.target.closest('[data-mode]');
+  if(mode){phiMode=mode.dataset.mode;renderFields();clearResult();}
+  if(e.target.closest('#add-factor')){if(document.querySelectorAll('.factor-row').length<8){$('factor-rows').insertAdjacentHTML('beforeend',factorRow());updateRemoveButtons();clearResult();document.querySelector('.factor-row:last-child input').focus();}}
+  const remove=e.target.closest('.remove-factor');
+  if(remove && document.querySelectorAll('.factor-row').length>1){remove.closest('.factor-row').remove();updateRemoveButtons();clearResult();}
+});
+$('reset').addEventListener('click',()=>{renderFields();clearResult();document.querySelector('#input-fields input')?.focus();});
+$('example-banner').addEventListener('click',e=>{const button=e.target.closest('[data-example]');if(!button)return;const example=button.dataset.example;selectTool('phi',example==='factors'?{mode:'factors'}:{mode:'number',n:example},true);});
+$('history-list').addEventListener('click',e=>{const b=e.target.closest('[data-history]');if(b){const h=history[Number(b.dataset.history)];selectTool(h.tool,h.payload);calculate(false);toast('已載入這筆計算');}});
+$('clear-history').addEventListener('click',()=>{history=[];renderHistory();});
+$('copy-answer').addEventListener('click',async()=>{
+  if(!copyText)return;
+  try{
+    if(navigator.clipboard && window.isSecureContext)await navigator.clipboard.writeText(copyText);
+    else{const area=document.createElement('textarea');area.value=copyText;area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok)throw new Error('copy');}
+    toast('已複製計算結果');
+  }catch{toast('無法存取剪貼簿，請選取結果後複製。');}
+});
+renderHistory();selectTool('phi',{mode:'number',n:'4356'});calculate(false);
+</script>
+</body>
+</html>
